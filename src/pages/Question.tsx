@@ -12,7 +12,8 @@ export default function Question(){
   const [attempts,setAttempts] = useState(0)
   const [escaped,setEscaped] = useState(false)
 
-//   const cursorRef = useRef({x:0,y:0})
+  // Detect mobile
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
 
   const moveButton = (e:React.MouseEvent) => {
 
@@ -46,7 +47,6 @@ export default function Question(){
     )
 
     setPosition({x,y})
-
   }
 
   const handleYes = () => {
@@ -87,19 +87,27 @@ export default function Question(){
           YES
         </button>
 
-        <button
-          onMouseEnter={moveButton}
-          style={escaped ? {
-            position:"absolute",
-            left:position.x,
-            top:position.y
-          } : {}}
-          className="bg-red-500 px-6 py-3 rounded-lg text-white"
-        >
-          {attempts >= 10 ? "Stop trying 😭" : "NO"}
-        </button>
+        {!isMobile && (
+          <button
+            onMouseEnter={moveButton}
+            style={escaped ? {
+              position:"absolute",
+              left:position.x,
+              top:position.y
+            } : {}}
+            className="bg-red-500 px-6 py-3 rounded-lg text-white"
+          >
+            {attempts >= 10 ? "Stop trying 😭" : "NO"}
+          </button>
+        )}
 
       </div>
+
+      {isMobile && (
+        <div className="mt-6 text-gray-400 text-sm italic">
+          No is not available on mobile 😌
+        </div>
+      )}
 
     </div>
 
