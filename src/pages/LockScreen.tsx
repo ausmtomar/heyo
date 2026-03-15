@@ -71,7 +71,7 @@ export default function LockScreen(){
 
         <div className="z-10 flex flex-col items-center gap-6 backdrop-blur-md bg-white/5 border border-white/10 min-w-225 rounded-xl px-10 py-15">
 
-        <div className=" text-green-400 text-5xl">
+        <div className=" text-green-400 text-4xl">
 
             <Typewriter
             options={{
@@ -111,7 +111,7 @@ export default function LockScreen(){
             transition={{ duration:0.4 }}>
 
             <input
-            className="bg-[#121218] border text-2xl border-green-400 focus:border-[#00ff9f] text-green-400 px-4 py-2 font-terminal caret-green-400 w-90 outline-none "
+            className="bg-[#121218] border text-1xl border-green-400 focus:border-[#00ff9f] text-green-400 px-4 py-2 font-terminal caret-green-400 w-90 outline-none "
             placeholder="enter nickname..."
             value={input}
             onChange={(e)=>setInput(e.target.value)}
