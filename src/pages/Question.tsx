@@ -12,7 +12,7 @@ export default function Question(){
   const [attempts,setAttempts] = useState(0)
   const [escaped,setEscaped] = useState(false)
 
-  const cursorRef = useRef({x:0,y:0})
+//   const cursorRef = useRef({x:0,y:0})
 
   const moveButton = (e:React.MouseEvent) => {
 
