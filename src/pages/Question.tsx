@@ -10,8 +10,8 @@ export default function Question(){
 
   const moveButton = () => {
 
-    const x = Math.random()*400 - 200
-    const y = Math.random()*200 - 100
+    const x = Math.random() * window.innerWidth - window.innerWidth/2
+    const y = Math.random() * window.innerHeight - window.innerHeight/2
 
     setPosition({x,y})
 
@@ -57,7 +57,7 @@ export default function Question(){
             transform:`translate(${position.x}px,${position.y}px)`
           }}
 
-          className="bg-red-500 px-6 py-3 rounded-lg text-white transition"
+          className="bg-red-500 px-6 py-3 rounded-lg text-white absolute"
         >
           NO
         </button>
