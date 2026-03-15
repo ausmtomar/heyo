@@ -7,8 +7,10 @@ export default function Question(){
   const setPage = useAppStore((state)=>state.setPage)
 
   const [position,setPosition] = useState({x:0,y:0})
-
+  const [attempts, setAttempts] = useState(0)
   const moveButton = () => {
+
+    setAttempts(prev => prev + 1)
 
     const x = Math.random() * window.innerWidth - window.innerWidth/2
     const y = Math.random() * window.innerHeight - window.innerHeight/2
@@ -59,7 +61,7 @@ export default function Question(){
 
           className="bg-red-500 px-6 py-3 rounded-lg text-white absolute"
         >
-          NO
+          {attempts >= 10 ? "Stop trying 😭" : "NO"}
         </button>
 
       </div>
