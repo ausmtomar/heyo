@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: #121218;
+  color: white;
+  overflow: hidden;
+}
+
+/* body {
+  background: #0b0b0f; */
+  /* color: #f8f8f8;
+}
+*/
+
+.font-romantic {
+  font-family: "Playfair Display", serif;
+}
+
+.font-ui {
+  font-family: "Inter", sans-serif;
+}
+
+.font-terminal {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.text-glow {
+  text-shadow:
+    0 0 10px rgba(255,100,120,0.5),
+    0 0 30px rgba(255,100,120,0.3);
+}
