@@ -1,60 +1,75 @@
 import { motion } from "framer-motion"
 import { useAppStore } from "../store/appStore"
+import ContinueButton from "../components/ContinueButton"
+import TiltCard from "../components/TiltCard"
 
 export default function MessageBoard(){
 
   const setPage = useAppStore((state)=>state.setPage)
 
   const messages = [
-
-    "There is something I wanted to tell you for a while.",
-    "Every time we talk, my day becomes better.",
-    "You probably don't realize it...",
-    "But you are someone very special to me.",
-    "And that's why I built this little website."
-
+    {
+      text: "There is something I wanted to tell you for a while.",
+      img: "/images/1.jpg"
+    },
+    {
+      text: "Every time we talk, my day becomes better.",
+      img: "/images/2.jpg"
+    },
+    {
+      text: "You probably don't realize it...",
+      img: "/images/3.jpg"
+    },
+    {
+      text: "But you are someone very special to me.",
+      img: "/images/4.jpg"
+    },
+    {
+      text: "And that's why I built this little website.",
+      img: "/images/5.jpg"
+    }
   ]
 
   return(
 
-    <div
-      className="h-screen w-screen bg-black text-white font-romantic flex flex-col items-center justify-center cursor-pointer"
-      onClick={()=>setPage(4)}
-    >
+    <div className="min-h-screen w-screen bg-[#09095a] flex flex-col items-center overflow-y-auto">
 
-      <div className="max-w-xl space-y-6">
+      {messages.map((msg,index)=>(
 
-        {messages.map((msg,index)=>(
-          
-          <motion.div
+        <motion.section
+          key={index}
+          className={`w-full max-w-6xl flex flex-col items-center justify-center gap-16 py-32 px-6 
+          ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
 
-            key={index}
+          initial={{opacity:0,y:60}}
+          whileInView={{opacity:1,y:0}}
+          viewport={{once:true}}
+          transition={{duration:0.8}}
 
-            initial={{opacity:0, y:30}}
-            animate={{opacity:1, y:0}}
+        >
 
-            transition={{
-              delay: index*1.2,
-              duration: 0.8
-            }}
+          {/* IMAGE CARD */}
 
-            className="bg-white text-black p-4 rounded-xl shadow-lg"
-          >
+          <TiltCard img={msg.img} />
 
-            {msg}
 
-          </motion.div>
+          {/* TEXT (SEPARATE CONTAINER) */}
 
-        ))}
+          <div className="max-w-md text-white text-xl leading-relaxed font-light">
 
-      </div>
+            {msg.text}
 
-      <div className="mt-10 text-sm opacity-50">
-        click to continue
+          </div>
+
+        </motion.section>
+
+      ))}
+
+      <div className="pb-20">
+        <ContinueButton onClick={()=>setPage(4)} />
       </div>
 
     </div>
 
   )
-
 }

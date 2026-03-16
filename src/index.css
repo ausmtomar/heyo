@@ -11,7 +11,7 @@ html, body, #root {
   margin: 0;
   background: #121218;
   color: white;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .sweet-font {
   font-family: "Sweet Barbie";
