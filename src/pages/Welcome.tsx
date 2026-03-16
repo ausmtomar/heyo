@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { useEffect } from "react"
 import { useAppStore } from "../store/appStore"
 import { pianoMusic } from "../sounds/music"
+import StarsBackground from "../components/StarsBackground"
 
 export default function Welcome(){
 
@@ -15,25 +16,27 @@ export default function Welcome(){
 
   return(
 
+
     <div
-      className="h-screen w-screen bg-black flex items-center justify-center cursor-pointer"
+      className="h-screen w-screen bg-linear-to-b from-[#1d1d82a2] via-[#09095a] to-[#070747] flex items-center justify-center cursor-pointer"
       onClick={()=>setPage(2)}
     >
 
+      <StarsBackground />
       <motion.div
 
         initial={{opacity:0, scale:0.9}}
         animate={{opacity:1, scale:1}}
-        transition={{duration:2}}
+        transition={{duration:1.75}}
 
-        className="text-white text-4xl text-center font-serif"
+        className="relative text-[6rem] font-black text-center antialiased"
       >
+        <span className="sweet-font text-8xl font-bold">Hiyo, A{nickname}</span><br></br>
 
-        Hello {nickname}
-
-        <div className="text-lg mt-6 opacity-70">
-          I built something for you
+        <div className="pt-4 beau-font text-[1.5rem] tracking-wider mt-6 opacity-90 backdrop-blur-2xl">
+          Welcome to this site..(P.S. it’s specially made for you)<br></br>Something special awaits you...
         </div>
+        <p className="text-sm"></p>
 
         <div className="mt-10 text-sm opacity-40">
           click anywhere

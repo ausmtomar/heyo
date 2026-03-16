@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Sweet Barbie";
+   src: url("/fonts/SweetBarbie.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -7,27 +13,62 @@ html, body, #root {
   color: white;
   overflow: hidden;
 }
-
-/* body {
-  background: #0b0b0f; */
-  /* color: #f8f8f8;
+.sweet-font {
+  font-family: "Sweet Barbie";
 }
-*/
-
-.font-romantic {
-  font-family: "Playfair Display", serif;
+.beau-font {
+  font-family: 'Beau Rivage', cursive;
 }
+body {
+  /* font-family: "Sweet Barbie"; */
 
-.font-ui {
-  font-family: "Inter", sans-serif;
-}
-
-.font-terminal {
-  font-family: "JetBrains Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .text-glow {
   text-shadow:
     0 0 10px rgba(255,100,120,0.5),
     0 0 30px rgba(255,100,120,0.3);
+}
+
+@keyframes starBlink {
+
+  0% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+}
+
+.star {
+  position: absolute;
+  background: white;
+
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.animate-star {
+  animation: starBlink 3s infinite ease-in-out;
 }
