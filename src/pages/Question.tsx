@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useAppStore } from "../store/appStore"
 import confetti from "canvas-confetti"
 
@@ -12,8 +12,55 @@ export default function Question(){
   const [attempts,setAttempts] = useState(0)
   const [escaped,setEscaped] = useState(false)
 
-  // Detect mobile
+  const [step,setStep] = useState(1) // 👈 start from 1 (auto first line)
+  const [displayedText,setDisplayedText] = useState("")
+  const [completedLines,setCompletedLines] = useState<string[]>([])
+  const [isTyping,setIsTyping] = useState(false)
+
   const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+
+  const lines = [
+    "So...",
+    "I really like you a lot and wanna gup shup with you",
+    "There’s something I’ve been meaning to ask you.",
+    "Do you like me backk?"
+  ]
+
+  // TYPEWRITER
+  useEffect(()=>{
+    let i = 0
+    const currentLine = lines[step - 1]
+
+    setDisplayedText("")
+    setIsTyping(true)
+
+    const interval = setInterval(()=>{
+      i++
+      setDisplayedText(currentLine.slice(0,i))
+
+      if(i >= currentLine.length){
+        clearInterval(interval)
+        setIsTyping(false)
+
+        setCompletedLines(prev => {
+          // prevent duplicate push
+          if(prev.includes(currentLine)) return prev
+          return [...prev, currentLine]
+        })
+      }
+    }, 35)
+
+    return ()=> clearInterval(interval)
+
+  },[step])
+
+  // TAP NEXT
+  const nextStep = () => {
+    if(isTyping) return
+    if(step < lines.length){
+      setStep(prev => prev + 1)
+    }
+  }
 
   const moveButton = (e:React.MouseEvent) => {
 
@@ -52,59 +99,88 @@ export default function Question(){
   const handleYes = () => {
 
     confetti({
-      particleCount:300,
-      spread:150,
+      particleCount:400,
+      spread:180,
       origin:{y:0.6}
     })
 
     setTimeout(()=>{
       setPage(5)
-    },1500)
+    },3000)
 
   }
 
   return(
 
-    <div className="h-screen w-screen bg-black text-white flex flex-col items-center justify-center">
+    <div 
+      onClick={nextStep}
+      className="h-screen w-screen bg-[#09095a] text-white flex flex-col items-center justify-center"
+    >
 
-      <div className="text-5xl mb-12 text-center font-serif">
-        So...
-      </div>
+      {/* TEXT */}
+      <div className="flex flex-col items-center gap-5 text-center">
 
-      <div className="text-4xl mb-10 text-center text-glow">
-        Will you go out with me?
-      </div>
-
-      <div
-        ref={containerRef}
-        className="relative w-[500px] h-[200px] flex items-center justify-center gap-8"
-      >
-
-        <button
-          onClick={handleYes}
-          className="bg-green-500 px-6 py-3 rounded-lg text-white hover:bg-green-600 transition"
-        >
-          YES
-        </button>
-
-        {!isMobile && (
-          <button
-            onMouseEnter={moveButton}
-            style={escaped ? {
-              position:"absolute",
-              left:position.x,
-              top:position.y
-            } : {}}
-            className="bg-red-500 px-6 py-3 rounded-lg text-white"
+        {completedLines.map((line,index)=>(
+          <div
+            key={index}
+            className={index === 0 
+              ? "text-4xl font-serif"   // reduced from 5xl
+              : "text-3xl text-glow"   // reduced from 4xl
+            }
           >
-            {attempts >= 10 ? "Stop trying 😭" : "NO"}
-          </button>
+            {line}
+          </div>
+        ))}
+
+        {isTyping && (
+          <div className={step === 1 ? "text-4xl font-serif" : "text-3xl text-glow"}>
+            {displayedText}
+            <span className="animate-pulse">|</span>
+          </div>
+        )}
+
+        {/* 👇 TAP HINT */}
+        {!isTyping && step < lines.length && (
+          <div className="text-sm opacity-40 mt-4 animate-pulse">
+            tap to continue
+          </div>
         )}
 
       </div>
 
-      {isMobile && (
-        <div className="mt-6 text-gray-400 text-sm italic">
+      {/* BUTTONS */}
+      {step === lines.length && !isTyping && (
+        <div
+          ref={containerRef}
+          className="relative w-[500px] h-[200px] flex items-center justify-center gap-8 mt-10"
+        >
+
+          <button
+            onClick={handleYes}
+            className="bg-green-500 px-6 py-3 rounded-lg text-white hover:bg-green-600 transition"
+          >
+            YES
+          </button>
+
+          {!isMobile && (
+            <button
+              onMouseEnter={moveButton}
+              style={escaped ? {
+                position:"absolute",
+                left:position.x,
+                top:position.y
+              } : {}}
+              className="bg-red-500 px-6 py-3 rounded-lg text-white"
+            >
+              {attempts >= 4 ? "Stop trying 😭" : "NO"}
+            </button>
+          )}
+
+        </div>
+      )}
+
+      {isMobile && step === lines.length && !isTyping && (
+        <div className="mt-6 text-gray-300 text-sm italic">
           No is not available on mobile 😌
         </div>
       )}

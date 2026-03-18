@@ -23,23 +23,29 @@ function App() {
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <div className="w-screen h-screen overflow-hidden">   {/* 👈 ADD THIS */}
 
-      <motion.div
-       key={page}
+      <AnimatePresence mode="wait">
 
-        initial={{opacity:0, scale:0.98}}
-        animate={{opacity:1, scale:1}}
-        exit={{opacity:0, scale:1.02}}
+        <motion.div
+          key={page}
 
-        transition={{duration:0.8}}
-      >
+          className="w-full h-full overflow-hidden"   
 
-        {renderPage()}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
 
-      </motion.div>
+          transition={{ duration: 0.8 }}
+        >
 
-    </AnimatePresence>
+          {renderPage()}
+
+        </motion.div>
+
+      </AnimatePresence>
+
+    </div>
   )
 }
 
