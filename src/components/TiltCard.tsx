@@ -12,7 +12,7 @@ type Props = {
 }
 
 const ROTATION_RANGE = 30
-const HALF_ROTATION_RANGE = ROTATION_RANGE / 2
+// const HALF_ROTATION_RANGE = ROTATION_RANGE / 2
 
 export default function TiltCard({ img }: Props) {
 
