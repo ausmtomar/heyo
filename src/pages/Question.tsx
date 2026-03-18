@@ -114,7 +114,7 @@ export default function Question(){
 
     <div 
       onClick={nextStep}
-      className="h-screen w-screen bg-[#09095a] text-white flex flex-col items-center justify-center"
+      className="h-screen w-screen bg-[#181880] text-white flex flex-col items-center justify-center"
     >
 
       {/* TEXT */}

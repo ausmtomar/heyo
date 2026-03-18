@@ -42,7 +42,7 @@ export default function MessageBoard(){
 
   return(
 
-    <div className="h-full w-full bg-[#09095a] flex flex-col overflow-y-auto overflow-x-hidden">
+    <div className="h-full w-full bg-[#181880] flex flex-col overflow-y-auto overflow-x-hidden">
       {messages.map((msg,index)=>{
 
         const isLeft = index % 2 === 0

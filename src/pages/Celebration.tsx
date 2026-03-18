@@ -8,7 +8,7 @@ export default function Celebration(){
   },[])
 
   return(
-    <div className="h-screen w-screen bg-[#09095a] text-white flex flex-col items-center justify-center text-center">
+    <div className="h-screen w-screen bg-[#181880] text-white flex flex-col items-center justify-center text-center">
 
       {/* <div className="text-5xl mb-6">
         🎉

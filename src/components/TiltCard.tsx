@@ -3,14 +3,15 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useSpring
+  useSpring,
+  useTransform
 } from "framer-motion"
 
 type Props = {
   img: string
 }
 
-const ROTATION_RANGE = 17
+const ROTATION_RANGE = 30
 const HALF_ROTATION_RANGE = ROTATION_RANGE / 2
 
 export default function TiltCard({ img }: Props) {
@@ -19,18 +20,17 @@ export default function TiltCard({ img }: Props) {
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  
+
   const xSpring = useSpring(x, { stiffness: 120, damping: 15 })
   const ySpring = useSpring(y, { stiffness: 120, damping: 15 })
 
   const transform = useMotionTemplate`rotateX(${xSpring}deg) rotateY(${ySpring}deg)`
 
-  // 👇 Glow moves slightly with tilt
-  const glowX = useMotionTemplate`${ySpring * 2}px`
-  const glowY = useMotionTemplate`${xSpring * -2}px`
+  // ✅ FIX: useTransform instead of direct multiplication
+  const glowX = useTransform(ySpring, (val) => val * 2)
+  const glowY = useTransform(xSpring, (val) => val * -2)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-
     if (!ref.current) return
 
     const rect = ref.current.getBoundingClientRect()
@@ -38,11 +38,11 @@ export default function TiltCard({ img }: Props) {
     const width = rect.width
     const height = rect.height
 
-    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE
-    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE
+    const mouseX = (e.clientX - rect.left) / width
+    const mouseY = (e.clientY - rect.top) / height
 
-    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1
-    const rY = mouseX / width - HALF_ROTATION_RANGE
+    const rX = (mouseY - 0.5) * -ROTATION_RANGE
+    const rY = (mouseX - 0.5) * ROTATION_RANGE
 
     x.set(rX)
     y.set(rY)
@@ -54,7 +54,6 @@ export default function TiltCard({ img }: Props) {
   }
 
   return (
-
     <div className="relative flex items-center justify-center">
 
       {/* 🌌 BACKGROUND GLOW */}
@@ -88,7 +87,6 @@ export default function TiltCard({ img }: Props) {
           hover:scale-105 transition-transform
         "
       >
-
         <img
           src={img}
           loading="lazy"
@@ -96,7 +94,6 @@ export default function TiltCard({ img }: Props) {
           className="w-full h-full object-cover"
           style={{ transform: "translateZ(40px)" }}
         />
-
       </motion.div>
 
     </div>
