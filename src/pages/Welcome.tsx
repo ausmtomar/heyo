@@ -6,7 +6,6 @@ import StarsBackground from "../components/StarsBackground"
 
 export default function Welcome(){
 
-    const nickname = useAppStore((state)=>state.nickname)
     const setPage = useAppStore((state)=>state.setPage)
 
     useEffect(() => {
