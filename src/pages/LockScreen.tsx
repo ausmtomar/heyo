@@ -12,10 +12,9 @@ export default function LockScreen(){
     const [hintIndex, setHintIndex] = useState(0)
     const [shake, setShake] = useState(false)
     const validNicknames = [
-        "aayush",
-        "ayush",
-        "aayushman",
-        "tomar"
+        "fruti",
+        "chef",
+        "chef fr"
         ]
 
     const hints = [

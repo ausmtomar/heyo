@@ -40,7 +40,7 @@ export default function Welcome(){
           transition={{duration:1.75}}
           className="relative text-[6rem] font-black text-center antialiased"
         >
-          <span className="sweet-font text-8xl font-bold">Hiyo, A{nickname}</span><br></br>
+          <span className="sweet-font text-8xl font-bold">Hiyo, Shruti</span><br></br>
           <div className="pt-4 beau-font text-[1.5rem] tracking-wider mt-6 opacity-90 backdrop-blur-2xl">
             Welcome to this site..(P.S. it’s specially made for you)<br></br>Something special awaits you...
           </div>
