@@ -10,23 +10,23 @@ export default function MessageBoard(){
 
   const messages = [
     {
-      text: "There is something I wanted to tell you for a while.",
+      text: "Heyoooo, There is something I wanted to tell you for a while. I liked you the first time i saw you in Suvrat's story. IDK, i never said that for anyone but something clicked at the time, whether it was a joke or real i didn't know then.",
       img: "/images/1.webp"
     },
     {
-      text: "Every time we talk, my day becomes better.",
+      text: "Well then suvrat told you about it, we connected on insta thanks to you😂😂 and tbh I liked talking to you...",
       img: "/images/2.webp"
     },
     {
-      text: "You probably don't realize it...",
+      text: "You said sometimes ki i should come and attend this or that party happening there, well i came and it was a really fun time of my life. It was literally a go with the flow phase for those days i were there. No planning nothing just being in the moment.",
       img: "/images/3.webp"
     },
     {
-      text: "But you are someone very special to me.",
+      text: "Spending those 3 days with you, it was something special. I liked spending time with you, cracking jokes, telling stories. And i felt i could tell you anything without giving a second thought. After coming back, I realised that i never directly told you that i like you",
       img: "/images/4.webp"
     },
     {
-      text: "And that's why I built this little website.",
+      text: "So that's why I built this little website, to tell you that i really like you a lot. No pressure on you just wanted to confess this.",
       img: "/images/5.webp"
     }
   ]
@@ -80,7 +80,7 @@ export default function MessageBoard(){
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="max-w-md text-white text-xl leading-relaxed font-light"
+                className="max-w-200 text-white text-xl leading-relaxed font-light"
               >
                 {msg.text}
               </motion.div>
