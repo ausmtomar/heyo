@@ -23,7 +23,7 @@ export default function Question(){
     "So...",
     "I really like you a lot and wanna gup shup with you",
     "There’s something I’ve been meaning to ask you.",
-    "Do you like me backk?"
+    "I'd hate to be presumptuous, but you do fancy me?"
   ]
 
   // TYPEWRITER
